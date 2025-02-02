@@ -1,0 +1,664 @@
+//home.component.html
+<header>
+  <a routerLink="/" class="logo">Yes Bank</a>
+  <nav>
+    <a routerLink="/home">Home</a>
+    <a href="mailto:contact@outlook.com">Contact Us</a>
+  </nav>
+</header>
+
+<main>
+  <div class="left-section">
+    <img src="assets/bank2.png" alt="Bank Image" class="main-image">
+  </div>
+  <div class="right-section">
+    <p class="bank-info">
+      Welcome to Yes Bank. We provide personalized banking solutions tailored to your needs. Join us today for a seamless and secure banking experience!
+    </p>
+    <button class="register-btn" routerLink="/register">Register</button>
+    <button class="login-btn" routerLink="/login">Login</button> <!-- Added Login Button -->
+  </div>
+</main>
+
+<footer>
+  All Rights Reserved by Tata © 2025
+</footer>
+
+
+//home.component.css
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* Body Scrollbar Only */
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow-y: scroll; /* Enable vertical scrolling for the body */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+/* Header Styling */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #0072ce;
+  color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.logo {
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+nav a {
+  margin-left: 15px;
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+}
+
+  nav a:hover {
+    text-decoration: underline;
+  }
+
+/* Main Content */
+main {
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 100vh;
+  padding-top: 80px; /* Add space to prevent overlap with fixed header */
+}
+
+.left-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-image {
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  object-fit: cover;
+}
+
+.right-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+}
+
+.bank-info {
+  font-size: 18px;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.register-btn, .login-btn {
+  padding: 15px 15px;
+  font-size: 15px;
+  background-color: #0072ce;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+  margin-top: 10px;
+}
+
+  .register-btn:hover, .login-btn:hover {
+    background-color: #0056a3;
+  }
+
+/* Footer Styling */
+footer {
+  text-align: center;
+  padding: 15px;
+  background-color: #0072ce;
+  color: white;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  nav {
+    margin-top: 10px;
+  }
+
+  main {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .left-section,
+  .right-section {
+    flex: 1 1 100%;
+  }
+
+  .main-image {
+    width: 100%;
+  }
+
+  .register-btn, .login-btn {
+    margin-top: 20px;
+  }
+}
+
+
+//home.component.ts
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
+})
+export class HomeComponent { }
+
+
+//login.component.html
+<main>
+  <div class="login-form">
+    <h2>Employee Login</h2>
+
+    <div class="form-group">
+      <label for="employeeId">Employee ID:</label>
+      <input type="text" id="employeeId" [(ngModel)]="employeeId" name="employeeId" required />
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" id="password" [(ngModel)]="password" name="password" required />
+    </div>
+
+    <button (click)="onLogin()" class="login-btn">Login</button>
+
+    <p *ngIf="loginError" class="error">{{ loginError }}</p>
+    <!-- Display login success message here -->
+    <p *ngIf="loginMessage" class="success">{{ loginMessage }}</p>
+
+    <button class="back-btn" routerLink="/home">Back to Home</button>
+  </div>
+</main>
+
+<footer>
+  All Rights Reserved by Tata © 2025
+</footer>
+
+
+//login.component.css
+/* General Styling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #0072ce;
+  color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.logo {
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+nav a {
+  margin-left: 15px;
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+}
+
+  nav a:hover {
+    text-decoration: underline;
+  }
+
+main {
+  display: flex;
+  justify-content: center;
+  padding-top: 80px; /* Add space to prevent overlap with fixed header */
+}
+
+.login-form {
+  width: 300px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #0072ce;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+  button:hover {
+    background-color: #0056a3;
+  }
+
+.error {
+  color: red;
+  font-size: 12px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.back-btn {
+  margin-top: 15px;
+  background-color: #ccc;
+}
+
+footer {
+  text-align: center;
+  padding: 15px;
+  background-color: #0072ce;
+  color: white;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+
+//login.component.ts
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
+})
+export class LoginComponent {
+  employeeId: string = '';
+  password: string = '';
+  loginError: string = '';
+  loginMessage: string = ''; // New variable to store success message
+
+  // Predefined credentials
+  predefinedEmployeeId = 'emp@gmail.com';
+  predefinedPassword = 'password123';
+
+  constructor(private router: Router) { }
+
+  onLogin(): void {
+    // Check if the employeeId and password match the predefined credentials
+    if (this.employeeId === this.predefinedEmployeeId && this.password === this.predefinedPassword) {
+      this.loginError = '';
+      this.loginMessage = 'Login Successful'; // Set success message
+      alert('Login Successful'); // Optional: Show browser alert as well
+      this.router.navigate(['/home']);
+    } else {
+      this.loginError = 'Invalid Employee ID or Password';
+      this.loginMessage = ''; // Clear success message if login fails
+    }
+  }
+}
+
+
+//register.component.html
+<div class="container">
+  <h2>Employee Registration</h2>
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+    <!-- Form Fields -->
+    <div class="form-group">
+      <label for="firstName">First Name:</label>
+      <input type="text" id="firstName" formControlName="firstName" />
+      <small class="error" *ngIf="submitted && registrationForm.controls['firstName'].invalid">
+        Minimum 3 characters, no repeating characters.
+      </small>
+    </div>
+
+    <div class="form-group">
+      <label for="lastName">Last Name:</label>
+      <input type="text" id="lastName" formControlName="lastName" />
+      <small class="error" *ngIf="submitted && registrationForm.controls['lastName'].invalid">
+        Minimum 3 characters, no repeating characters.
+      </small>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" id="email" formControlName="email" />
+      <small class="error" *ngIf="submitted && registrationForm.controls['email'].invalid">
+        Must be a valid Gmail address.
+      </small>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" id="password" formControlName="password" />
+      <small class="error" *ngIf="submitted && registrationForm.controls['password'].invalid">
+        Min 6 characters, must contain a special character.
+      </small>
+    </div>
+
+    <div class="form-group">
+      <label for="dateOfBirth">Date of Birth:</label>
+      <input type="date" id="dateOfBirth" formControlName="dateOfBirth" />
+      <small class="error" *ngIf="submitted && registrationForm.controls['dateOfBirth'].invalid">
+        No future dates allowed.
+      </small>
+    </div>
+
+    <button type="submit" class="register-btn">Register</button>
+    <button type="button" class="back-btn" routerLink="/home">Back to Home</button>
+  </form>
+
+  <!-- Success Message Display -->
+  <div *ngIf="successMessage" class="success-message">
+    {{ successMessage }}
+  </div>
+</div>
+
+<footer class="footer">
+  All Rights Reserved by Tata © 2025
+</footer>
+
+
+//register.component.css
+/* Center the form */
+.container {
+  width: 50%;
+  margin: 10vh auto;
+  padding: 30px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Make form fields take full width */
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Style form inputs */
+.form-group {
+  width: 90%;
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Label styling */
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* Input field styling */
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Error message styling */
+.error {
+  color: red;
+  font-size: 12px;
+}
+
+/* Button styling */
+.register-btn, .back-btn {
+  width: 90%;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.register-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.back-btn {
+  background-color: #0072ce;
+  color: white;
+}
+
+/* Footer styling */
+.footer {
+  text-align: center;
+  padding: 15px;
+  background-color: #0072ce;
+  color: white;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+/* Success message styling */
+.success-message {
+  color: green;
+  font-weight: bold;
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  border-radius: 5px;
+  text-align: center;
+}
+
+
+
+//register.component.ts
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-registration',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
+})
+export class RegisterComponent implements OnInit {
+  registrationForm: FormGroup;
+  submitted = false;
+  successMessage: string = '';  // New variable for success message
+
+  constructor(
+    private fb: FormBuilder,
+    private router: Router
+  ) {
+    this.registrationForm = this.fb.group({
+      firstName: ['', [Validators.required, Validators.minLength(3), this.noThreeSameConsecutiveChars]],
+      lastName: ['', [Validators.required, Validators.minLength(3), this.noThreeSameConsecutiveChars]],
+      email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@gmail.com$')]],
+      password: ['', [Validators.required, Validators.pattern('^(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{6,}$')]],
+      dateOfBirth: ['', [Validators.required, this.noFutureDate]]
+    });
+  }
+
+  ngOnInit(): void { }
+
+  onSubmit(): void {
+    this.submitted = true;
+    if (this.registrationForm.valid) {
+      // Logic for registration (e.g., API call) can go here
+
+      // Set success message when registration is successful
+      this.successMessage = 'Registration Successful! Please proceed to log in.';
+
+      // Optional: Redirect to login page after a short delay
+      setTimeout(() => this.router.navigate(['/login']), 3000);
+    }
+  }
+
+  // Custom validator for date
+  noFutureDate(control: any) {
+    const today = new Date().toISOString().split('T')[0];
+    return control.value > today ? { futureDate: true } : null;
+  }
+
+  // Custom validator to prevent 3 consecutive same characters
+  noThreeSameConsecutiveChars(control: any) {
+    const value = control.value;
+    if (/(\w)\1\1/.test(value)) {
+      return { sameChars: true };
+    }
+    return null;
+  }
+}
+
+
+//app-routing.module.ts
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';  // Add LoginComponent import
+
+const routes: Routes = [
+  { path: '', component: HomeComponent }, // Default home route
+  { path: 'home', component: HomeComponent }, // Home route
+  { path: 'register', component: RegisterComponent }, // Registration route
+  { path: 'login', component: LoginComponent } // Login route
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+
+
+//app.module.ts
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
+import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';  // <-- Import FormsModule here
+import { HomeComponent } from './home/home.component';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';  // Add LoginComponent import
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    RegisterComponent,
+    LoginComponent  // <-- Declare LoginComponent here
+  ],
+  imports: [
+    BrowserModule,
+    ReactiveFormsModule,
+    FormsModule,  // <-- Add FormsModule here for ngModel
+    RouterModule.forRoot([
+      { path: '', component: HomeComponent },
+      { path: 'home', component: HomeComponent },
+      { path: 'register', component: RegisterComponent },
+      { path: 'login', component: LoginComponent }  // <-- Add login route here
+    ]),
+    BrowserAnimationsModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+
+//app.component.ts
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent { }
+
+
+//
